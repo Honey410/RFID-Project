@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty-registration</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <script src="{% static 'js/jquery.min.css' %}" type="text/js"></script>
+    <script src="{% static 'js/popper.min.css' %}" type="text/js"></script>
+    <script src="{% static 'js/bootstrap.min.css' %}" type="text/js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2 align="center">Faculty Login</h2>
+        <form action="{% url 'faclogin' %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="passwd">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
