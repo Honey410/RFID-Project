@@ -1,5 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import *
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 def FacultyRegPage(request):
     return render(request, "app/facreg.html")
@@ -11,7 +13,7 @@ def FacultyIndexPage(request):
     return render(request, "app/faculty-index.html")
 
 def AddStudentPage(request):
-    all_id = Rfid.objects.all().first()
+    all_id = list(Rfid.objects.all())[-1]
     return render(request, "app/add-student.html",{'rfid':all_id})
 
 def FacultyRegistration(request):
@@ -47,6 +49,12 @@ def FacultyLogin(request):
             return render(request, "app/facultylogin.html", {'msg': msg})
 
 def ScanRfid(request):
-    rfid = request.GET['card_uid']
-    store = rfid.objects.create(Card_key=rfid)
+    rfids = request.GET['card_uid']
+    print(rfids)
+    store = Rfid.objects.create(Card_key=rfids)
+    subject = 'Today attendance'
+    message = f'{rfids} is here'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['poojarayash268@gmail.com',]
+    send_mail(subject,message,email_from,recipient_list)
     return redirect('addstudent')
