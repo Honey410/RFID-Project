@@ -41,3 +41,7 @@ def FacultyLogin(request):
         else:
             msg = "faculty doesn't exist"
             return render(request, "app/facultylogin.html", {'msg': msg})
+
+def ScanRfid(request):
+    print(request.GET['card_uid'])
+    return redirect('faculty-index')

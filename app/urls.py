@@ -7,4 +7,5 @@ urlpatterns = [
     path('Faculty-index/',views.FacultyIndexPage,name="faculty-index"),
     path('faculty-registration/',views.FacultyRegistration,name="facreg"),
     path('login-faculty/',views.FacultyLogin,name="faclogin"),
+    path('scan-id/',views.ScanRfid,name='scanid'),
 ]
