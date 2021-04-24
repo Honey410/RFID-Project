@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('faculty/',views.FacultyRegPage,name="faculty"),
     path('faculty-login/',views.FacultyLoginPage,name="facultylogin"),
+    path('add-student/',views.AddStudentPage,name="addstudent"),
     path('Faculty-index/',views.FacultyIndexPage,name="faculty-index"),
     path('faculty-registration/',views.FacultyRegistration,name="facreg"),
     path('login-faculty/',views.FacultyLogin,name="faclogin"),

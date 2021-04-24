@@ -10,6 +10,9 @@ def FacultyLoginPage(request):
 def FacultyIndexPage(request):
     return render(request, "app/faculty-index.html")
 
+def AddStudentPage(request):
+    return render(request, "app/add-student.html")
+
 def FacultyRegistration(request):
     if request.method == 'POST':
         fname = request.POST['fname']
@@ -43,5 +46,5 @@ def FacultyLogin(request):
             return render(request, "app/facultylogin.html", {'msg': msg})
 
 def ScanRfid(request):
-    print(request.GET['card_uid'])
-    return redirect('faculty-index')
+    rfid = request.GET['card_uid']
+    return render(request, "app/add-student.html",{'rfid':rfid})
