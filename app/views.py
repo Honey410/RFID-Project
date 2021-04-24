@@ -11,7 +11,8 @@ def FacultyIndexPage(request):
     return render(request, "app/faculty-index.html")
 
 def AddStudentPage(request):
-    return render(request, "app/add-student.html")
+    all_id = Rfid.objects.all().first()
+    return render(request, "app/add-student.html",{'rfid':all_id})
 
 def FacultyRegistration(request):
     if request.method == 'POST':
@@ -47,4 +48,5 @@ def FacultyLogin(request):
 
 def ScanRfid(request):
     rfid = request.GET['card_uid']
-    return render(request, "app/add-student.html",{'rfid':rfid})
+    store = rfid.objects.create(Card_key=rfid)
+    return redirect('addstudent')
