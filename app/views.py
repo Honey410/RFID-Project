@@ -13,8 +13,11 @@ def FacultyIndexPage(request):
     return render(request, "app/faculty-index.html")
 
 def AddStudentPage(request):
-    all_id = list(Rfid.objects.all())[-1]
-    return render(request, "app/add-student.html",{'rfid':all_id})
+    try:
+        all_id = list(Rfid.objects.all())[-1]
+        return render(request, "app/add-student.html",{'rfid':all_id})
+    except:
+        return render(request, "app/add-student.html",{'rfid':'No Key'})
 
 def FacultyRegistration(request):
     if request.method == 'POST':
@@ -50,7 +53,7 @@ def FacultyLogin(request):
 
 def SendAttMail():
     subject = 'welcome to GFG world'
-    message = f'Hi, thank you for registering in geeksforgeeks.'
+    message = f'Hi {user.username}, thank you for registering in geeksforgeeks.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = ['yashpoojara268@gmail.com', ]
     send_mail( subject, message, email_from, recipient_list )                                                                                                                     
@@ -59,5 +62,4 @@ def ScanRfid(request):
     rfids = request.GET['card_uid']
     print(rfids)
     store = Rfid.objects.create(Card_key=rfids)
-    SendAttMail()
     return redirect('addstudent')

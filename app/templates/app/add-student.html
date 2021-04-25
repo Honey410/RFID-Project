@@ -36,15 +36,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% if rfid %}
+                {% if rfid == 'No Key' %}
                 <tr align="center">
-                    <td><input type="text" value="{{rfid.Card_key}}" readonly></td>
+                    <td><input type="text" value="No Key" readonly></td>
                     <td><a href="#">Add student</a></td>
                 </tr>
                 {% else %}
                 <tr align="center">
-                    <td>No Key</td>
-                    <td><a href="#">No Key</a></td>
+                     <td><input type="text" value="{{rfid.Card_key}}" readonly></td>
+                     <td><a href="#">Add student</a></td>
                 </tr>
                 {% endif %}
             </tbody>
