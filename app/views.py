@@ -48,13 +48,16 @@ def FacultyLogin(request):
             msg = "faculty doesn't exist"
             return render(request, "app/facultylogin.html", {'msg': msg})
 
+def SendAttMail():
+    subject = 'welcome to GFG world'
+    message = f'Hi, thank you for registering in geeksforgeeks.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['yashpoojara268@gmail.com', ]
+    send_mail( subject, message, email_from, recipient_list )                                                                                                                     
+
 def ScanRfid(request):
     rfids = request.GET['card_uid']
     print(rfids)
     store = Rfid.objects.create(Card_key=rfids)
-    subject = 'Today attendance'
-    message = f'{rfids} is here'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['poojarayash268@gmail.com',]
-    send_mail(subject,message,email_from,recipient_list)
+    SendAttMail()
     return redirect('addstudent')
