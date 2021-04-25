@@ -14,11 +14,18 @@
     <script src="{% static 'js/jquery.min.css' %}" type="text/js"></script>
     <script src="{% static 'js/popper.min.css' %}" type="text/js"></script>
     <script src="{% static 'js/bootstrap.min.css' %}" type="text/js"></script>
+    <script>
+        function ReloadURL() {
+            var url = "{% url 'addstudent' %}";
+            window.location.href = url;
+        }
+    </script>
 </head>
 
 <body>
     {% block content %}
     {% endblock %}
+    <center><input type="button" id="ref" value="refresh" class="mt-4" onclick="ReloadURL()"></center>
     <h2 align="center" class="mt-3 mb-3">Register-Student</h2>
     <div class="container">
         <table class="table table-bordered" align="center">
