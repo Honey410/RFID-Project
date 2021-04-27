@@ -21,10 +21,12 @@ class Student(models.Model):
 
 class Rfid(models.Model):
     Card_key = models.CharField(max_length=100)
+    att_mode = models.CharField(max_length=100,default="Mode")
+    stu_allot = models.ForeignKey(Student,on_delete=models.CASCADE,null=True)
+    allot = models.BooleanField(default=False)
 
 class Attendance(models.Model):
-    Student = models.ForeignKey(Student, on_delete=models.CASCADE)
     rfid = models.ForeignKey(Rfid, on_delete=models.CASCADE,null=True)
-    Date = models.DateTimeField(auto_now_add=True)
-    TimeIn = models.TimeField(auto_now_add=True)
-    TimeOut = models.TimeField(auto_now_add=True)
+    Date = models.DateField(null=True)
+    TimeIn = models.TimeField(null=True)
+    TimeOut = models.TimeField(null=True)

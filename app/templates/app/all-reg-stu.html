@@ -14,43 +14,37 @@
     <script src="{% static 'js/jquery.min.css' %}" type="text/js"></script>
     <script src="{% static 'js/popper.min.css' %}" type="text/js"></script>
     <script src="{% static 'js/bootstrap.min.css' %}" type="text/js"></script>
-    <script>
-        function ReloadURL() {
-            var url = "{% url 'addstudent' %}";
-            window.location.href = url;
-        }
-    </script>
 </head>
 
 <body>
     {% block content %}
     {% endblock %}
-    <center><input type="button" id="ref" value="refresh" class="mt-4" onclick="ReloadURL()"></center>
-    <h2 align="center" class="mt-3 mb-3">Register-Student</h2>
+    <h2 align="center" class="mt-3 mb-3">All Registered-Student</h2>
     <div class="container">
         <table class="table table-bordered" align="center">
             <thead>
                 <tr align="center">
                     <th>RFID-KEY</th>
-                    <th>ACTION</th>
+                    <th>Attendance-status</th>
+                    <th>Name</th>
+                    <th>action</th>
                 </tr>
             </thead>
             <tbody>
-                {% if rfid == 'No Key' %}
-                <tr align="center">
-                    <td><input type="text" value="No Key" readonly></td>
-                    <td><a href="#">Add student</a></td>
-                </tr>
-                {% else %}
-                {% for i in rfid %}
-                {% if i.stu_allot is None %}
+                {% for i in allstu %}
+                {% if i.stu_allot is not None %}
                 <tr align="center">
                     <td><input type="text" value="{{i.Card_key}}" readonly></td>
-                    <td><a href="{% url 'student-reg' rf=i.Card_key %}">Add student</a></td>
+                    {% if i.allot == True %}
+                    <td><b style="color: green;">on</b></td>
+                    {% else %}
+                    <td><b style="color: red;">off</b></td>
+                    {% endif %}
+                    <td>{{i.stu_allot.Firstname}}</td>
+                    <td><a href="{% url 'update-student' pk=i.id %}">Update</a></td>
                 </tr>
                 {% endif %}
                 {% endfor %}
-                {% endif %}
             </tbody>
         </table>
     </div>
